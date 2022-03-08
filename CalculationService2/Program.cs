@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using Insight.Support.Standard.Services.Authorization;
+using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -111,6 +112,9 @@ if (enableSecurity)
 
     builder.Services.AddSingleton<IAuthorizationHandler, InsightPermissionHandler>();
 }
+
+builder.Services.AddApplicationInsightsTelemetry();
+builder.Services.AddSingleton<TelemetryClient>();
 
 builder.Services.AddControllers(options =>
 {
